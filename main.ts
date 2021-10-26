@@ -11,6 +11,7 @@ function createWindow() {
     width: 800,
     height: 500,
     frame: false,
+    transparent: true,
     titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
         preload: path.join(__dirname, "preload.ts"),
