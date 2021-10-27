@@ -48,10 +48,13 @@ const Login = ({ history }: RouteComponentProps<TParams>) => {
             <div className="view">
 
                 <div style={{ flexDirection: "row", display: "flex" }}>
-                <div className="minimizeBox" onClick={() => {
-                        ipc.send("minimize")
-                    }}>
-                        <img style={{
+                <div className="minimizeBox" >
+                        <img 
+                        onClick={() => {
+                            ipc.send("minimize")
+                        }}
+                        
+                        style={{
                             width: 12,
                             height: 12,
                             cursor: "pointer"
@@ -59,10 +62,13 @@ const Login = ({ history }: RouteComponentProps<TParams>) => {
 
                             src={MinimizeIcon} alt="" />
                     </div>
-                    <div className="closeBox" onClick={() => {
-                        ipc.send('closeApp')
-                    }}>
-                        <img style={{
+                    <div className="closeBox" >
+                        <img 
+                        onClick={() => {
+                            ipc.send('closeApp')
+                        }}
+                        
+                        style={{
                             width: 12,
                             height: 12,
                             cursor: "pointer"

@@ -39,10 +39,14 @@ const SettingsPage = ({ history }: RouteComponentProps<TParams>) => {
         <div className="backgroundContainer">
             <div style={{ flexDirection: "row", display: "flex" }}>
                 <img className="logo" src={Logo} alt="" />
-                <div className="minimizeWinBox" onClick={() => {
-                    ipc.send("minimize")
-                }}>
-                    <img style={{
+                <div className="minimizeWinBox" >
+                    <img 
+                    
+                    onClick={() => {
+                        ipc.send("minimize")
+                    }}
+                    
+                    style={{
                         width: 12,
                         height: 12,
                         cursor: "pointer"
@@ -50,10 +54,14 @@ const SettingsPage = ({ history }: RouteComponentProps<TParams>) => {
 
                         src={MinimizeIcon} alt="" />
                 </div>
-                <div className="closeWinBox" onClick={() => {
-                    ipc.send('closeApp')
-                }}>
-                    <img style={{
+                <div className="closeWinBox" >
+                    <img
+                    
+                    onClick={() => {
+                        ipc.send('closeApp')
+                    }}
+                    
+                    style={{
                         width: 12,
                         height: 12,
                         cursor: "pointer"
