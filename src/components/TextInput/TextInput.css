@@ -14,6 +14,6 @@
   }
   
   .inputText:focus {
-    border: 1px solid #111;
+    border-bottom: 1px solid #4CC2FF;
     outline: black;
   }

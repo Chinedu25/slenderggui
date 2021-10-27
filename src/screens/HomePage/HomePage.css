@@ -27,6 +27,10 @@ justify-content: center;
 cursor: pointer;
 align-items: center;
 }
+.minimizeWinBox:hover{
+    background-color: #FFAA00;
+}
+
 
 .closeWinBox{
     position: "absolute";
@@ -38,7 +42,9 @@ justify-content: center;
 cursor: pointer;
 align-items: center;
 }
-
+.closeWinBox:hover{
+    background-color: red;
+}
 .profileContainer{
     display: flex;
     position: relative;

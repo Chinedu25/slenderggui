@@ -1,3 +1,6 @@
+import "./ButtonStyles.css";
+
+
 
 type ButtonProps ={
     text: string,
@@ -16,7 +19,7 @@ const Button = ({width,text,cursor,height,backgroundColor,color, onClick}:Button
     return(
         <button
         onClick={onClick}
-        className="loginBtn"
+        className="Button"
         type="submit"
         style={{
           width: width,
@@ -29,7 +32,8 @@ const Button = ({width,text,cursor,height,backgroundColor,color, onClick}:Button
           fontFamily: "Exo2Medium",
           border: "1px solid #272D3C",
           fontSize:18,
-          borderRadius:"4px"
+          borderRadius:"4px",
+
         }}
       >
         {text}

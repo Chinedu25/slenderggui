@@ -44,12 +44,12 @@ const LogOutPage = ({ history }: RouteComponentProps<TParams>) => {
         <div className="backgroundContainer">
             <div style={{ flexDirection: "row", display: "flex" }}>
                 <img className="logo" src={Logo} alt="" />
-                <div className="minimizeWinBox" >
-                    <img 
-                    onClick={() => {
+                <div className="minimizeWinBox"
+                 onClick={() => {
                         ipc.send("minimize")
                     }}
-
+ >
+                    <img 
                     style={{
                         width: 12,
                         height: 12,
@@ -58,12 +58,12 @@ const LogOutPage = ({ history }: RouteComponentProps<TParams>) => {
 
                         src={MinimizeIcon} alt="" />
                 </div>
-                <div className="closeWinBox" >
-                    <img 
-                    onClick={() => {
+                <div className="closeWinBox" onClick={() => {
                         ipc.send('closeApp')
                     }}
-                    
+                    >
+                    <img 
+
                     style={{
                         width: 12,
                         height: 12,

@@ -34,20 +34,27 @@ type TParams = { id: string };
 
 const HomePage = ({ history }: RouteComponentProps<TParams>) => {
 
-    const [begin, setBegin] = useState(false);
+    const [begin, setBegin] = useState<Boolean>(false);
 
         //@ts-ignore
         const ipc = window.ipcRenderer;
+
+
+        //This just to make check box work
+        const [useGPU1State, setUseGPU1State] = useState<Boolean>(true);
+        const [useGPU2State, setUseGPU2State] = useState<Boolean>(true);
+        const [useGPU3State, setUseGPU3State] = useState<Boolean>(false);
+
 
     return (
         <div className="backgroundContainer">
             <div style={{flexDirection: "row", display:"flex"}}>
                 <img className="logo" src={Logo} alt="" />
-                <div className="minimizeWinBox" >
-                        <img 
-                        onClick={() => {
+                <div className="minimizeWinBox" onClick={() => {
                         ipc.send("minimize")
-                    }}
+                    }}>
+                        <img 
+        
                     style={{
                             width: 12,
                             height: 12,
@@ -56,11 +63,12 @@ const HomePage = ({ history }: RouteComponentProps<TParams>) => {
 
                             src={MinimizeIcon} alt="" />
                     </div>
-                <div className="closeWinBox" >
-                        <img 
-                        onClick={() => {
+                <div className="closeWinBox" 
+                onClick={() => {
                             ipc.send('closeApp')
-                        }}
+                        }} >
+                        <img 
+
                         style={{
                             width: 12,
                             height: 12,
@@ -185,9 +193,15 @@ const HomePage = ({ history }: RouteComponentProps<TParams>) => {
                             <img style={{ marginLeft: 381, marginTop: 10, width: 15, height: 15 }} src={HelpIcon} alt="" />
                             <span className="pcInfoTitle">Your Hardware</span>
                             <div style={{ marginTop: 12 }}>
-                                <PCInfoListBar type={"gpu"} text={"Nvidia GeForce RTX 3090"} isCheckBox={true} isActive={true} />
-                                <PCInfoListBar type={"gpu"} text={"Nvidia GeForce RTX 3090"} isCheckBox={true} isActive={true} />
-                                <PCInfoListBar type={"cpu"} text={"AMD Ryzen 9 5950X"} isCheckBox={true} isActive={false} />
+                                <PCInfoListBar type={"gpu"} text={"Nvidia GeForce RTX 3090"} isCheckBox={true} isActive={useGPU1State} onClick={()=>{
+                                    setUseGPU1State(!useGPU1State);
+                                }} />
+                                <PCInfoListBar type={"gpu"} text={"Nvidia GeForce RTX 3090"} isCheckBox={true} isActive={useGPU2State} onClick={()=>{
+                                    setUseGPU2State(!useGPU2State);
+                                }}/>
+                                <PCInfoListBar type={"cpu"} text={"AMD Ryzen 9 5950X"} isCheckBox={true} isActive={useGPU3State} onClick={()=>{
+                                    setUseGPU3State(!useGPU3State);
+                                }} />
                             </div>
                         </div>
 

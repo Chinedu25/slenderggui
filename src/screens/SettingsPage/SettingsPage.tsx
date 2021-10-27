@@ -39,33 +39,33 @@ const SettingsPage = ({ history }: RouteComponentProps<TParams>) => {
         <div className="backgroundContainer">
             <div style={{ flexDirection: "row", display: "flex" }}>
                 <img className="logo" src={Logo} alt="" />
-                <div className="minimizeWinBox" >
-                    <img 
-                    
+                <div className="minimizeWinBox"
                     onClick={() => {
                         ipc.send("minimize")
                     }}
-                    
-                    style={{
-                        width: 12,
-                        height: 12,
-                        cursor: "pointer"
-                    }}
+                >
+                    <img
+
+                        style={{
+                            width: 12,
+                            height: 12,
+                            cursor: "pointer"
+                        }}
 
                         src={MinimizeIcon} alt="" />
                 </div>
-                <div className="closeWinBox" >
-                    <img
-                    
+                <div className="closeWinBox"
                     onClick={() => {
                         ipc.send('closeApp')
                     }}
-                    
-                    style={{
-                        width: 12,
-                        height: 12,
-                        cursor: "pointer"
-                    }}
+                >
+                    <img
+
+                        style={{
+                            width: 12,
+                            height: 12,
+                            cursor: "pointer"
+                        }}
 
                         src={CloseIcon} alt="" />
                 </div>

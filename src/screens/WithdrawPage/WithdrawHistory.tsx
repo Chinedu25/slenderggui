@@ -1,27 +1,47 @@
 import "./WithdrawPage.css"
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 import ProcessingIcon from "../../assets/images/ProcessingIcon.png"
 import WithdrawalCompleteIcon from "../../assets/images/WithdrawalCompleteIcon.png"
+import OfflineIcon from  '../../assets/images/OfflineIcon.png' 
 
 type WithdrawHistoryProps ={
     title: string,
     amount: string,
     date: string,
     type: string,
+    message?: string
 }
 
-const WithdrawHistory = ({title, amount, date, type}:WithdrawHistoryProps)=>{
+const WithdrawHistory = ({title, amount, date, message,type}:WithdrawHistoryProps)=>{
 
-    let iconType = type === "complete" ? WithdrawalCompleteIcon : ProcessingIcon;
+    let iconType = type === "complete" ? WithdrawalCompleteIcon : type === "failed" ? OfflineIcon: ProcessingIcon;
 
     return(
         <div className="withdrawHistoryItem">
             <div style={{marginTop: 12, marginLeft: 14,display: "flex", flexDirection: "row"}}>
             <span className="withdrawHisTitle">{title}</span>
-            <img style={{
-                height: 15,
-                width: 15,
-                marginLeft: 20
-            }} src={iconType} alt=""/>
+
+            {
+                message != null ?
+                <Tippy content={message}>
+
+                <img style={{
+                    height: 15,
+                    width: 15,
+                    marginLeft: 20
+                }} src={iconType} alt=""/>
+                </Tippy>
+                
+                :
+                <img style={{
+                    height: 15,
+                    width: 15,
+                    marginLeft: 20
+                }} src={iconType} alt=""/>
+            }
+
+   
             </div>
             <div style={{marginTop: 4, marginLeft: 14,display: "flex", flexDirection: "row"}}>
             <span style= {{

@@ -1,26 +1,28 @@
 import AmdCPUIcon from '../../assets/images/amdCpu.png'
 import GPUIcon from '../../assets/images/GPUIcon.png'
 import PCIcon from '../../assets/images/PCIcon.png'
-import CheckedBox from '../../assets/images/CheckedBox.png' 
-import UncheckedBox from '../../assets/images/UncheckedBox.png' 
+import Tippy from '@tippyjs/react'
+import 'tippy.js/dist/tippy.css'
 import OnlineIcon from  '../../assets/images/OnlineIcon.png' 
 import OfflineIcon from  '../../assets/images/OfflineIcon.png' 
+import CheckBox from '../../components/CheckBox/CheckBox'
 
 
 type PCInfoProps = {
     text: string,
     isCheckBox: Boolean,
     isActive: Boolean,
-    type: string
+    type: string,
+    onClick?: any,
 }
 
-const PCInfoListBar = ({text, type, isCheckBox, isActive}:PCInfoProps)=>{
+const PCInfoListBar = ({text, type, isCheckBox, isActive, onClick}:PCInfoProps)=>{
 
     let iconType = type === "cpu" ? AmdCPUIcon: type === "gpu" ? GPUIcon : PCIcon
 
-    let statusType = isCheckBox === true ? isActive === true ? CheckedBox : UncheckedBox :
-                    isActive === true ? OnlineIcon : OfflineIcon
+    let statusType = isActive === true ? OnlineIcon : OfflineIcon
 
+    let messageType:string = isActive === true ?  "Connected Device" : "Disconnected Device"
 
     return(
         <div style={{
@@ -48,13 +50,26 @@ const PCInfoListBar = ({text, type, isCheckBox, isActive}:PCInfoProps)=>{
             
             <div style={{width: 202, }}>{text}</div>
             
+            {
+                isCheckBox ?
+
+                <CheckBox style={{marginLeft: 60}} value={isActive} onClick={onClick}/>
+                :
+                <Tippy
+                content={messageType}
+                >
+
+                <img style={{
+                    width:15,
+                    height:15,
+                    marginLeft:60,
+                    justifySelf:"flex-end"
+                }} src={statusType} alt=""/>
+                </Tippy>
+
+            }
             
-            <img style={{
-                width:15,
-                height:15,
-                marginLeft:60,
-                justifySelf:"flex-end"
-            }} src={statusType} alt=""/>
+
             
             </div>
     );

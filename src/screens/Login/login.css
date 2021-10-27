@@ -25,6 +25,9 @@ justify-content: center;
 cursor: pointer;
 align-items: center;
 }
+.minimizeBox:hover{
+    background-color: #FFAA00;
+}
 
 .closeBox{
     position: "absolute";
@@ -36,6 +39,10 @@ justify-content: center;
 cursor: pointer;
 align-items: center;
 }
+.closeBox:hover{
+    background-color: red;
+}
+
 .logo{
     position: absolute;
     margin-top: 13px;
