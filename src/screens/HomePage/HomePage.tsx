@@ -18,6 +18,9 @@ import PendingIcon from "../../assets/images/PendingIcon.png"
 import StaticRings from "../../assets/images/StaticRings.png"
 import RotatingRingsActive from "../../assets/images/RotatingRingsActive.png"
 
+import CloseIcon from "../../assets/images/CloseIcon.svg"
+import MinimizeIcon from "../../assets/images/MinimizeIcon.svg"
+
 import PCInfoListBar from "./PCInfoListBar"
 
 import { useState } from "react"
@@ -33,11 +36,35 @@ const HomePage = ({ history }: RouteComponentProps<TParams>) => {
 
     const [begin, setBegin] = useState(false);
 
+        //@ts-ignore
+        const ipc = window.ipcRenderer;
 
     return (
         <div className="backgroundContainer">
-            <div>
+            <div style={{flexDirection: "row", display:"flex"}}>
                 <img className="logo" src={Logo} alt="" />
+                <div className="minimizeWinBox" onClick={() => {
+                        ipc.send("minimize")
+                    }}>
+                        <img style={{
+                            width: 12,
+                            height: 12,
+                            cursor: "pointer"
+                        }}
+
+                            src={MinimizeIcon} alt="" />
+                    </div>
+                <div className="closeWinBox" onClick={() => {
+                        ipc.send('closeApp')
+                    }}>
+                        <img style={{
+                            width: 12,
+                            height: 12,
+                            cursor: "pointer"
+                        }}
+
+                            src={CloseIcon} alt="" />
+                    </div>
             </div>
 
             <div className="View">
@@ -119,13 +146,13 @@ const HomePage = ({ history }: RouteComponentProps<TParams>) => {
                                         width: 128,
                                         marginLeft: 35
                                     }} src={RotatingRingsActive} alt="" />
-                                    <span className="defaultText" style={{fontSize:18 ,color: "#4CC2FF", textAlign: "center", position: "absolute", left: 1040, top: 231 }}>
+                                    <span className="defaultText" style={{fontSize:18 ,color: "#4CC2FF", textAlign: "center", position: "absolute", left: 1040, top: 221 }}>
                                         32.12
                                     </span>
-                                    <span className="defaultText" style={{fontSize:14 ,color: "#aafcc0", textAlign: "center", position: "absolute", left: 1040, top: 251 }}>
+                                    <span className="defaultText" style={{fontSize:14 ,color: "#aafcc0", textAlign: "center", position: "absolute", left: 1040, top: 241 }}>
                                         R$/HR
                                     </span>
-                                    <span className="defaultText" style={{fontSize:14, textAlign: "center", position: "absolute", left: 1044, top: 271 }}>
+                                    <span className="defaultText" style={{fontSize:14, textAlign: "center", position: "absolute", left: 1044, top: 261 }}>
                                         STOP
                                     </span>
                                 </div>
@@ -140,7 +167,7 @@ const HomePage = ({ history }: RouteComponentProps<TParams>) => {
                                         width: 128,
                                         marginLeft: 35
                                     }} src={StaticRings} alt="" />
-                                    <span className="defaultText" style={{ color: "#4CC2FF", textAlign: "center", position: "absolute", left: 1037, top: 245 }}>
+                                    <span className="defaultText" style={{ color: "#4CC2FF", textAlign: "center", position: "absolute", left: 1037, top: 238 }}>
                                         Begin
                                     </span>
                                 </div>

@@ -2,6 +2,8 @@ const path = require('path');
 
 const { app, BrowserWindow , ipcMain} = require('electron');
 const isDev = require('electron-is-dev');
+const find = require('find-process');
+
 
 let mainWindow;
 
@@ -56,6 +58,18 @@ app.whenReady().then(() => {
       if (BrowserWindow.getAllWindows().length === 0) createWindow();
     });
   });
+
+
+//   app.on('before-quit' , (e) => {
+//     find('port', 3000)
+//       .then(function (list) {
+//       if(list[0] != null){
+//           process.kill(list[0].pid, 'SIGHUP');
+//       }
+//     }.catch((e) => {
+//         console.log(e.stack || e);
+//     });
+// });
   
   // Quit when all windows are closed, except on macOS. There, it's common
   // for applications and their menu bar to stay active until the user quits
@@ -66,8 +80,8 @@ app.whenReady().then(() => {
 
   ipcMain.on('resize-window', (event, arg) => {
     mainWindow.setSize(1280,768);
-    mainWindow.setResizable(true);
-    mainWindow.frame = true;
+   // mainWindow.setResizable(true);
+    
     mainWindow.center();
   })
  
@@ -76,5 +90,11 @@ app.whenReady().then(() => {
     mainWindow.center();
   })
 
+  ipcMain.on('minimize', (evt, arg) => {
+    mainWindow.minimize();
+});
+  ipcMain.on('closeApp', (evt, arg) => {
+    app.exit(0)
+});
   // In this file you can include the rest of your app's specific main process
   // code. You can also put them in separate files and require them here.

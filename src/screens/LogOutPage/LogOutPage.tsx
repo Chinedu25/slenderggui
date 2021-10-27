@@ -17,6 +17,10 @@ import BalanceIcon from "../../assets/images/BalanceIcon.png"
 import PendingIcon from "../../assets/images/PendingIcon.png"
 import ExclamationFailedIcon from "../../assets/images/ExclamationFailedIcon.png"
 
+
+import CloseIcon from "../../assets/images/CloseIcon.svg"
+import MinimizeIcon from "../../assets/images/MinimizeIcon.svg"
+
 import {
     RouteComponentProps
 } from "react-router-dom";
@@ -29,17 +33,39 @@ const LogOutPage = ({ history }: RouteComponentProps<TParams>) => {
     //@ts-ignore
     const ipc = window.ipcRenderer;
 
-const LogOutFunction = ()=>{
+    const LogOutFunction = () => {
 
-    ipc.send('shrink-window');
-    history.replace("./")
+        ipc.send('shrink-window');
+        history.replace("./")
 
-}
+    }
 
     return (
         <div className="backgroundContainer">
-            <div>
+            <div style={{ flexDirection: "row", display: "flex" }}>
                 <img className="logo" src={Logo} alt="" />
+                <div className="minimizeWinBox" onClick={() => {
+                    ipc.send("minimize")
+                }}>
+                    <img style={{
+                        width: 12,
+                        height: 12,
+                        cursor: "pointer"
+                    }}
+
+                        src={MinimizeIcon} alt="" />
+                </div>
+                <div className="closeWinBox" onClick={() => {
+                    ipc.send('closeApp')
+                }}>
+                    <img style={{
+                        width: 12,
+                        height: 12,
+                        cursor: "pointer"
+                    }}
+
+                        src={CloseIcon} alt="" />
+                </div>
             </div>
 
             <div className="View">
@@ -105,25 +131,25 @@ const LogOutFunction = ()=>{
 
                         <span style={{ lineHeight: 1, marginTop: 18 }} className="pcInfoTitle">Log Out</span>
 
-                        <div style={{marginTop: 12, justifyContent:"center", display:"flex"}}>
-                        <div className='logOutInnerContainer'>
-                            <img style={{
-                                height: 25,
-                                width: 25,
-                                marginLeft: 14,
-                            }} src={ExclamationFailedIcon} alt=""/>
+                        <div style={{ marginTop: 12, justifyContent: "center", display: "flex" }}>
+                            <div className='logOutInnerContainer'>
+                                <img style={{
+                                    height: 25,
+                                    width: 25,
+                                    marginLeft: 14,
+                                }} src={ExclamationFailedIcon} alt="" />
 
-                            <span className="defaultText">Are you sure you want to log out?</span>
-                            <div style={{
-                                marginLeft:258
-                            }}>
-                            <Button color={"#fff"} backgroundColor={"#E22C2C"} text={"Log Out"} cursor="pointer" width={165} height={36} onClick={()=>{
+                                <span className="defaultText">Are you sure you want to log out?</span>
+                                <div style={{
+                                    marginLeft: 258
+                                }}>
+                                    <Button color={"#fff"} backgroundColor={"#E22C2C"} text={"Log Out"} cursor="pointer" width={165} height={36} onClick={() => {
 
-                                LogOutFunction();
-                            }}/>
+                                        LogOutFunction();
+                                    }} />
+                                </div>
+
                             </div>
-                          
-                        </div>
                         </div>
 
                     </div>

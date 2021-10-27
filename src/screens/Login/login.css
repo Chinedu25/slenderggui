@@ -12,19 +12,39 @@
     backdrop-filter: blur(100px);
 }
 .view{
-    flex: 1;
-    position: relative;
+   flex: 1;
 }
 
+.minimizeBox{
+    position: "absolute";
+    height: 35px;
+    width: 57px;
+display: flex;
+margin-left: 700px;
+justify-content: center;
+cursor: pointer;
+align-items: center;
+}
+
+.closeBox{
+    position: "absolute";
+    height: 35px;
+    width: 57px;
+display: flex;
+margin-left: 10px;
+justify-content: center;
+cursor: pointer;
+align-items: center;
+}
 .logo{
     position: absolute;
-    margin-top: 20px;
+    margin-top: 13px;
     margin-left: 20px;
     left: 0%;
 }
 
 .largeLogo{
-    margin-top: 46px;
+    margin-top: 24px;
 }
 
 .slendergg{

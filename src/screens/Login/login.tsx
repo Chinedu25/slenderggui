@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
     RouteComponentProps
-  } from "react-router-dom";
+} from "react-router-dom";
 
 import "./login.css";
 import Logo from '../../assets/images/Logo.svg'
@@ -9,11 +9,12 @@ import LargeLogo from '../../assets/images/slenderggLogoHair.svg'
 import TextInput from "../../components/TextInput/TextInput";
 import Button from "../../components/Button/Button";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import CloseIcon from "../../assets/images/CloseIcon.svg"
+import MinimizeIcon from "../../assets/images/MinimizeIcon.svg"
 
 type TParams = { id: string };
 
-const Login = ({history}:RouteComponentProps<TParams>) => {
+const Login = ({ history }: RouteComponentProps<TParams>) => {
 
     const [robUsername, setRobUsername] = useState("");
 
@@ -34,8 +35,8 @@ const Login = ({history}:RouteComponentProps<TParams>) => {
     //fake function to pretend logging
     const TestLogging = () => {
         setLogging(true);
-        setTimeout(()=>{
-           ipc.send('resize-window');
+        setTimeout(() => {
+            ipc.send('resize-window');
             history.push("/HomePage");
         }, 3000)
 
@@ -43,9 +44,39 @@ const Login = ({history}:RouteComponentProps<TParams>) => {
 
     return (
         <div className="container">
+
             <div className="view">
-                <img className="logo" src={Logo} alt="" />
-                <img className="largeLogo" src={LargeLogo} alt="" />
+
+                <div style={{ flexDirection: "row", display: "flex" }}>
+                <div className="minimizeBox" onClick={() => {
+                        ipc.send("minimize")
+                    }}>
+                        <img style={{
+                            width: 12,
+                            height: 12,
+                            cursor: "pointer"
+                        }}
+
+                            src={MinimizeIcon} alt="" />
+                    </div>
+                    <div className="closeBox" onClick={() => {
+                        ipc.send('closeApp')
+                    }}>
+                        <img style={{
+                            width: 12,
+                            height: 12,
+                            cursor: "pointer"
+                        }}
+
+                            src={CloseIcon} alt="" />
+                    </div>
+
+                    <img className="logo" src={Logo} alt="" />
+                </div>
+                <div style={{ marginTop: 0, display: "flex", justifyContent: "center" }}>
+                    <img className="largeLogo" src={LargeLogo} alt="" />
+                </div>
+
             </div>
 
             {
@@ -57,12 +88,12 @@ const Login = ({history}:RouteComponentProps<TParams>) => {
                         </h4>
 
                         <div style={{ marginTop: 53 }}>
-                                <Button width={165} height={36} cursor={"pointer"}
-                                    text={"Back to Log In"}
-                                    onClick={() => {
-                                        setIsErrorUI(false);
-                                    }} />
-                            </div>
+                            <Button width={165} height={36} cursor={"pointer"}
+                                text={"Back to Log In"}
+                                onClick={() => {
+                                    setIsErrorUI(false);
+                                }} />
+                        </div>
                     </div>
 
 
@@ -75,11 +106,11 @@ const Login = ({history}:RouteComponentProps<TParams>) => {
                                 <span className="initialLoadText">Loading</span>
                             </div>
                             <div>
-                                <h3 className="disclaimerText" style={{ marginTop: 97 }}>
+                                <h3 className="disclaimerText" style={{ marginTop: 81 }}>
                                     Please ensure your entered username is correct. We will not refund robux if withdrawn into an incorrect account.
                                 </h3>
                             </div>
-                 
+
                         </div>
                         :
                         logging ?
@@ -96,7 +127,7 @@ const Login = ({history}:RouteComponentProps<TParams>) => {
                             <div className="loginSection">
                                 <h4 className="slendergg">slender.gg</h4>
                                 <h3 className="loginMessage">Please enter your roblox username to start earning robux.</h3>
-                                <TextInput value={robUsername} placeholder={'Roblox Username'} width={"335px"} type={"text"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                <TextInput value={robUsername} placeholder={'Roblox Username'} width={"335px"} height={"40px"} type={"text"} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
                                     setRobUsername(e.target.value);
                                 }} />
                                 <div style={{ marginTop: 3 }}>

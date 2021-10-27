@@ -18,6 +18,8 @@ import BalanceIcon from "../../assets/images/BalanceIcon.png"
 import PendingIcon from "../../assets/images/PendingIcon.png"
 import SlenderGGLogoSmall from "../../assets/images/SlenderGGLogoSmall.svg"
 
+import CloseIcon from "../../assets/images/CloseIcon.svg"
+import MinimizeIcon from "../../assets/images/MinimizeIcon.svg"
 import {
     RouteComponentProps
 } from "react-router-dom";
@@ -28,12 +30,38 @@ import FlatButton from "../../components/Button/FlatButton"
 type TParams = { id: string };
 
 const SettingsPage = ({ history }: RouteComponentProps<TParams>) => {
+
+    //@ts-ignore
+    const ipc = window.ipcRenderer;
+
+
     return (
         <div className="backgroundContainer">
-            <div>
+            <div style={{ flexDirection: "row", display: "flex" }}>
                 <img className="logo" src={Logo} alt="" />
-            </div>
+                <div className="minimizeWinBox" onClick={() => {
+                    ipc.send("minimize")
+                }}>
+                    <img style={{
+                        width: 12,
+                        height: 12,
+                        cursor: "pointer"
+                    }}
 
+                        src={MinimizeIcon} alt="" />
+                </div>
+                <div className="closeWinBox" onClick={() => {
+                    ipc.send('closeApp')
+                }}>
+                    <img style={{
+                        width: 12,
+                        height: 12,
+                        cursor: "pointer"
+                    }}
+
+                        src={CloseIcon} alt="" />
+                </div>
+            </div>
             <div className="View">
                 <div className="sideBar">
                     <div className="profileContainer">

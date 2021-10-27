@@ -20,6 +20,11 @@ import TextInput from "../../components/TextInput/TextInput"
 import ProcessingIcon from "../../assets/images/ProcessingIcon.png"
 import WithdrawalCompleteIcon from "../../assets/images/WithdrawalCompleteIcon.png"
 
+
+import CloseIcon from "../../assets/images/CloseIcon.svg"
+import MinimizeIcon from "../../assets/images/MinimizeIcon.svg"
+
+
 import { useState } from "react"
 import Button from "../../components/Button/Button"
 import WithdrawStatus from "./WithdrawStatus"
@@ -40,11 +45,35 @@ const WithdrawPage = ({ history }: RouteComponentProps<TParams>) => {
 
     const [gamePassID, setGamePassID] = useState("")
 
+    //@ts-ignore
+    const ipc = window.ipcRenderer;
 
     return (
         <div className="backgroundContainer">
-            <div>
+            <div style={{ flexDirection: "row", display: "flex" }}>
                 <img className="logo" src={Logo} alt="" />
+                <div className="minimizeWinBox" onClick={() => {
+                    ipc.send("minimize")
+                }}>
+                    <img style={{
+                        width: 12,
+                        height: 12,
+                        cursor: "pointer"
+                    }}
+
+                        src={MinimizeIcon} alt="" />
+                </div>
+                <div className="closeWinBox" onClick={() => {
+                    ipc.send('closeApp')
+                }}>
+                    <img style={{
+                        width: 12,
+                        height: 12,
+                        cursor: "pointer"
+                    }}
+
+                        src={CloseIcon} alt="" />
+                </div>
             </div>
 
             <div className="View">
@@ -197,7 +226,7 @@ const WithdrawPage = ({ history }: RouteComponentProps<TParams>) => {
                                 height: 25,
                                 marginLeft: 14,
                                 marginRight: 23.56
-                            }} src={DailyRobloxIcon} alt=""/>
+                            }} src={DailyRobloxIcon} alt="" />
                             <span style={{ width: 600 }} className="statisticsText">Estimated Daily Robux from Current PC</span>
                             <span style={{ width: 100, marginLeft: 40, fontWeight: 400, textAlign: "right", color: "#4CC2FF" }} className="statisticsText">1024.32 R$</span>
                         </div>
@@ -207,7 +236,7 @@ const WithdrawPage = ({ history }: RouteComponentProps<TParams>) => {
                                 height: 22,
                                 marginLeft: 14,
                                 marginRight: 23.56
-                            }} src={SystemRobloxIcon} alt=""/>
+                            }} src={SystemRobloxIcon} alt="" />
                             <span style={{ width: 600 }} className="statisticsText">Estimated Daily Robux from All Connected PCs</span>
                             <span style={{ width: 100, marginLeft: 40, fontWeight: 400, textAlign: "right", color: "#4CC2FF" }} className="statisticsText">1536.96 R$</span>
                         </div>
@@ -218,7 +247,7 @@ const WithdrawPage = ({ history }: RouteComponentProps<TParams>) => {
                                     height: 25,
                                     marginLeft: 14,
                                     marginRight: 23.56
-                                }} src={PendingIcon} alt=""/>
+                                }} src={PendingIcon} alt="" />
                                 <span style={{ width: 220 }} className="statisticsText">Pending Amount</span>
                                 <span style={{ width: 100, marginLeft: 10, fontWeight: 400, textAlign: "right", color: "#4CC2FF" }} className="statisticsText">128.14 R$</span>
                             </div>
