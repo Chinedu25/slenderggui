@@ -32,8 +32,7 @@ type TParams = { id: string };
 const SettingsPage = ({ history }: RouteComponentProps<TParams>) => {
 
     //@ts-ignore
-    const ipc = window.ipcRenderer;
-
+    const ipc = window.api;
 
     return (
         <div className="backgroundContainer">

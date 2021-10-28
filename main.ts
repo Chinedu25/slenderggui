@@ -3,7 +3,7 @@ const path = require('path');
 const { app, Tray,Menu,BrowserWindow , ipcMain} = require('electron');
 const isDev = require('electron-is-dev');
 const find = require('find-process');
-
+const fs = require("fs");
 
 let mainWindow;
 let isQuiting;
@@ -29,11 +29,11 @@ function createWindow() {
     webPreferences: {
         preload: path.join(__dirname, "preload.ts"),
        //preload: `${__dirname}/preload.js`,
-        //nodeIntegration: false,
+        nodeIntegration: false,
         // contextIsolation: findAllByTestId,
         //@ts-ignore
         enableRemoteModule: true,
-        contextIsolation: false,
+        contextIsolation: true,
       },
       resizable: false,
 
@@ -53,7 +53,7 @@ function createWindow() {
   //     slashes: true,
   //   })
   // );
-  
+
 
   mainWindow.on("closed", () => (mainWindow = null));
 }
@@ -121,30 +121,8 @@ var contextMenu = Menu.buildFromTemplate([
     if (process.platform !== "darwin") app.quit();
   });
 
-  ipcMain.on('resize-window', (event, arg) => {
-    mainWindow.setSize(1280,768);
-   // mainWindow.setResizable(true);
-    
-    mainWindow.center();
-  })
+
  
-  ipcMain.on('shrink-window', (event, arg) => {
-    mainWindow.setSize(800, 500)
-    mainWindow.center();
-  })
-
-  ipcMain.on('minimize', (evt, arg) => {
-    mainWindow.minimize();
-});
-  ipcMain.on('closeApp', (evt, arg) => {
-    if (!isQuiting) {
-      evt.preventDefault();
-      mainWindow.hide();
-      tray = createTray();
-    }
-    //app.exit(0)
-});
-
 app.on('restore', function (event) {
   mainWindow.show();
   tray.destroy();
@@ -173,5 +151,43 @@ function createTray() {
   appIcon.setContextMenu(contextMenu);
   return appIcon;
 }
+
+
+
+ipcMain.on("minimize", (event, args) => {
+  fs.readFile("path/to/file", (error, data) => {
+
+    mainWindow.minimize();
+    // Send result back to renderer process
+   // mainWindow.webContents.send("fromMain", "responseOj");
+  });
+});
+
+ipcMain.on("closeApp", (event, args) => {
+  fs.readFile("path/to/file", (error, data) => {
+    if (!isQuiting) {
+      event.preventDefault();
+      mainWindow.hide();
+      tray = createTray();
+    }
+  });
+});
+
+ipcMain.on('shrink-window', (event, args) => {
+  fs.readFile("path/to/file", (error, data) => {
+    mainWindow.setSize(800, 500)
+    mainWindow.center();
+  });
+});
+
+
+ipcMain.on('resize-window', (event, args) => {
+  fs.readFile("path/to/file", (error, data) => {
+    mainWindow.setSize(1280,768);
+    // mainWindow.setResizable(true);
+     
+     mainWindow.center();
+  });
+});
   // In this file you can include the rest of your app's specific main process
   // code. You can also put them in separate files and require them here.

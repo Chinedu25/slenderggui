@@ -25,7 +25,8 @@ const Login = ({ history }: RouteComponentProps<TParams>) => {
     const [isErrorUI, setIsErrorUI] = useState(false);
 
     //@ts-ignore
-    const ipc = window.ipcRenderer;
+    const ipc = window.api;
+
 
     //Just to prove it works and moves to next part of UI
     setTimeout(() => {
@@ -50,7 +51,7 @@ const Login = ({ history }: RouteComponentProps<TParams>) => {
                 <div style={{ flexDirection: "row", display: "flex" }}>
                 <div className="minimizeBox"   
                  onClick={() => {
-                            ipc.send("minimize")
+                            ipc.send('minimize')
                         }}>
                         <img 
                         style={{

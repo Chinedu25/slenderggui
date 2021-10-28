@@ -37,7 +37,7 @@ const HomePage = ({ history }: RouteComponentProps<TParams>) => {
     const [begin, setBegin] = useState<Boolean>(false);
 
         //@ts-ignore
-        const ipc = window.ipcRenderer;
+        const ipc = window.api;
 
 
         //This just to make check box work

@@ -31,7 +31,7 @@ type TParams = { id: string };
 const LogOutPage = ({ history }: RouteComponentProps<TParams>) => {
 
     //@ts-ignore
-    const ipc = window.ipcRenderer;
+    const ipc = window.api;
 
     const LogOutFunction = () => {
 

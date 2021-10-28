@@ -46,7 +46,7 @@ const WithdrawPage = ({ history }: RouteComponentProps<TParams>) => {
     const [gamePassID, setGamePassID] = useState("")
 
     //@ts-ignore
-    const ipc = window.ipcRenderer;
+    const ipc = window.api;
 
     return (
         <div className="backgroundContainer">
