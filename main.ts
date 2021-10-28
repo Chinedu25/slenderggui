@@ -1,11 +1,17 @@
 const path = require('path');
 
-const { app, BrowserWindow , ipcMain} = require('electron');
+const { app, Tray,Menu,BrowserWindow , ipcMain} = require('electron');
 const isDev = require('electron-is-dev');
 const find = require('find-process');
 
 
 let mainWindow;
+let isQuiting;
+let tray = null;
+
+
+
+const iconPath = path.join(__dirname, "/src/assets/images/SlenderGGLogoSmall.svg");
 
 function createWindow() {
   // Create the browser window.
@@ -13,6 +19,7 @@ function createWindow() {
     width: 800,
     height: 500,
     frame: false,
+    icon:iconPath,
     transparent: true,
     titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
@@ -51,7 +58,7 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
     createWindow();
-  
+
     app.on("activate", function () {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
@@ -59,7 +66,27 @@ app.whenReady().then(() => {
     });
   });
 
-
+  app.on('before-quit', function () {
+    isQuiting = true;
+  });
+  
+  // app.on('ready', () => {
+  //   tray = new Tray(path.join(__dirname, iconPath));
+  
+  //   tray.setContextMenu(Menu.buildFromTemplate([
+  //     {
+  //       label: 'Show App', click: function () {
+  //         mainWindow.show();
+  //       }
+  //     },
+  //     {
+  //       label: 'Quit', click: function () {
+  //         isQuiting = true;
+  //         app.quit();
+  //       }
+  //     }
+  //   ]));
+  
 //   app.on('before-quit' , (e) => {
 //     find('port', 3000)
 //       .then(function (list) {
@@ -70,6 +97,17 @@ app.whenReady().then(() => {
 //         console.log(e.stack || e);
 //     });
 // });
+
+
+var contextMenu = Menu.buildFromTemplate([
+  { label: 'Show App', click:  function(){
+      mainWindow.show();
+  } },
+  { label: 'Quit', click:  function(){
+      app.isQuiting = true;
+      app.quit();
+  } }
+]);
   
   // Quit when all windows are closed, except on macOS. There, it's common
   // for applications and their menu bar to stay active until the user quits
@@ -94,7 +132,41 @@ app.whenReady().then(() => {
     mainWindow.minimize();
 });
   ipcMain.on('closeApp', (evt, arg) => {
-    app.exit(0)
+    if (!isQuiting) {
+      evt.preventDefault();
+      mainWindow.hide();
+      tray = createTray();
+    }
+    //app.exit(0)
 });
+
+app.on('restore', function (event) {
+  mainWindow.show();
+  tray.destroy();
+});
+
+function createTray() {
+  let appIcon = new Tray(iconPath);
+  const contextMenu = Menu.buildFromTemplate([
+      {
+          label: 'Show', click: function () {
+              mainWindow.show();
+          }
+      },
+      {
+          label: 'Exit', click: function () {
+              app.isQuiting = true;
+              app.quit();
+          }
+      }
+  ]);
+
+  appIcon.on('double-click', function (event) {
+      mainWindow.show();
+  });
+  appIcon.setToolTip('Tray Tutorial');
+  appIcon.setContextMenu(contextMenu);
+  return appIcon;
+}
   // In this file you can include the rest of your app's specific main process
   // code. You can also put them in separate files and require them here.
