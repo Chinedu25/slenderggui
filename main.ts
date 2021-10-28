@@ -11,7 +11,11 @@ let tray = null;
 
 
 
-const iconPath = path.join(__dirname, "/src/assets/images/SlenderGGLogoSmall.svg");
+//const iconPath = path.join(__dirname, "/src/assets/images/SlenderGGLogoSmall.svg");
+
+const iconPath = process.platform !== 'darwin'
+    ? 'src/assets/icons/logo.ico'
+    : 'src/assets/icons/logo.icns';
 
 function createWindow() {
   // Create the browser window.
