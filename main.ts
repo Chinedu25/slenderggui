@@ -29,7 +29,7 @@ function createWindow() {
     webPreferences: {
         preload: path.join(__dirname, "preload.ts"),
        //preload: `${__dirname}/preload.js`,
-        nodeIntegration: true,
+        //nodeIntegration: false,
         // contextIsolation: findAllByTestId,
         //@ts-ignore
         enableRemoteModule: true,
@@ -53,6 +53,7 @@ function createWindow() {
   //     slashes: true,
   //   })
   // );
+  
 
   mainWindow.on("closed", () => (mainWindow = null));
 }
@@ -168,7 +169,7 @@ function createTray() {
   appIcon.on('double-click', function (event) {
       mainWindow.show();
   });
-  appIcon.setToolTip('Tray Tutorial');
+  appIcon.setToolTip('SlenderGG');
   appIcon.setContextMenu(contextMenu);
   return appIcon;
 }
