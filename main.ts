@@ -77,21 +77,19 @@ app.whenReady().then(() => {
 
 
 ipcMain.on("setIntensityPref", (event, args) => {
-  fs.readFile("path/to/file", (error, data) => {
+
 
     store.set("IntensityPref", args);
 
-  });
 });
 
 
 
 ipcMain.on("setUserPCName", (event, args) => {
-  fs.readFile("path/to/file", (error, data) => {
 
     store.set("UserPCName", args);
 
-  });
+
 });
 
 // ipcMain.on("getIntensityPref", (event, args) => {
@@ -174,39 +172,37 @@ function createTray() {
 
 
 ipcMain.on("minimize", (event, args) => {
-  fs.readFile("path/to/file", (error, data) => {
-
     mainWindow.minimize();
     // Send result back to renderer process
    // mainWindow.webContents.send("fromMain", "responseOj");
   });
-});
+
 
 ipcMain.on("closeApp", (event, args) => {
-  fs.readFile("path/to/file", (error, data) => {
+
     if (!isQuiting) {
       event.preventDefault();
       mainWindow.hide();
       tray = createTray();
     }
   });
-});
+
 
 ipcMain.on('shrink-window', (event, args) => {
-  fs.readFile("path/to/file", (error, data) => {
+
     mainWindow.setSize(800, 500)
     mainWindow.center();
   });
-});
+
 
 
 ipcMain.on('resize-window', (event, args) => {
-  fs.readFile("path/to/file", (error, data) => {
+
     mainWindow.setSize(1280,768);
     // mainWindow.setResizable(true);
      
      mainWindow.center();
   });
-});
+
   // In this file you can include the rest of your app's specific main process
   // code. You can also put them in separate files and require them here.
