@@ -2,14 +2,31 @@ import PCIcon from '../../assets/images/PCIcon.png'
 import EditIcon from '../../assets/images/EditIcon.png'
 import RefreshIcon from '../../assets/images/RefreshIcon.png'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import TextInput from '../../components/TextInput/TextInput'
 import Button from '../../components/Button/Button'
 
+   //@ts-ignore
+   const ipc = window.api;
 
 const RenamePC = () => {
     const [editPCName, setEditPCName] = useState(false);
     const [userPCName, setUserPCName] = useState("DESKTOP-D64SG9U")
+
+
+    useEffect(()=>{
+
+        ipc.invoke("getStoreValue", "UserPCName").then((response:any)=>{
+     
+            if (response){
+                if (response.length !== 0){
+                    setUserPCName(response); 
+                }
+            }
+    
+         
+         });
+    },[])
 
     return (
         <div className="refreshContainer">
@@ -29,6 +46,8 @@ const RenamePC = () => {
                         ]} />
                         <div style={{marginTop:10, marginLeft: 12}}>
                             <Button width={165} text={"Apply"} height={36} cursor={"pointer"} onClick={() => {
+                               
+                                ipc.send("setUserPCName", userPCName); 
                                 setEditPCName(false)
                             }} />
                         </div>

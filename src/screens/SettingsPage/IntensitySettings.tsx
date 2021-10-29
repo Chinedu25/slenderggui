@@ -6,11 +6,34 @@ import IntensityIconLow from "../../assets/images/IntensityIconLow.png"
 import IntensityIconHigh from "../../assets/images/IntensityIconHigh.png"
 import IntensityIconUltra from "../../assets/images/IntensityIconUltra.png"
 
-import {useState} from "react"
+import {useState, useRef,useEffect} from "react"
+
+   //@ts-ignore
+   const ipc = window.api;
+
+
+//let getSliderValuePref = 0;
 
 const IntensitySettings = () => {
 
-    const [sliderValue, setSliderValue] = useState(0);
+    const [sliderValue, setSliderValue] = useState(0)
+
+
+    useEffect(()=>{
+        
+        
+    ipc.invoke("getStoreValue", "IntensityPref").then((response:any)=>{
+        // console.log(response)
+         setSliderValue(response);
+        
+     });
+
+    },[])
+   
+
+    
+
+    
 
     let updatedIntensityImage = IntensityIconLow; 
     let titleText = "Intensity: Low"
@@ -70,6 +93,7 @@ const IntensitySettings = () => {
             }} src={IntensityIconLow} alt=""/>
             <div style={{ marginLeft: 25 ,marginTop: 8,width: 275, justifyContent:"center", display: "flex" }}>
                 <Slider
+                value={sliderValue}
                 handleStyle={{backgroundColor: '#4CC2FF', marginTop: -7.5, height: 20, width: 20,  border: "solid 6px #454545",
             }}
             railStyle={{ backgroundColor: '#9C9FA7' }}
@@ -77,7 +101,14 @@ const IntensitySettings = () => {
                 dotStyle={{backgroundColor: '#f04823', borderColor: '#f04823'}}
                 onChange={(value)=>{
                     setSliderValue(value);
-                }} />
+                    ipc.send("setIntensityPref", sliderValue); 
+                }}
+                onAfterChange={(value)=>{
+                    setSliderValue(value);
+                    ipc.send("setIntensityPref", sliderValue); 
+                  
+                }}
+                />
             </div>
             <img  style={{
                 width: 25,

@@ -4,14 +4,14 @@ const { app, Tray,Menu,BrowserWindow , ipcMain} = require('electron');
 const isDev = require('electron-is-dev');
 const find = require('find-process');
 const fs = require("fs");
+const Store = require('electron-store');
+
+const store = new Store();
 
 let mainWindow;
 let isQuiting;
 let tray = null;
 
-
-
-//const iconPath = path.join(__dirname, "/src/assets/images/SlenderGGLogoSmall.svg");
 
 const iconPath = process.platform !== 'darwin'
     ? 'src/assets/icons/logo.ico'
@@ -74,24 +74,43 @@ app.whenReady().then(() => {
   app.on('before-quit', function () {
     isQuiting = true;
   });
+
+
+ipcMain.on("setIntensityPref", (event, args) => {
+  fs.readFile("path/to/file", (error, data) => {
+
+    store.set("IntensityPref", args);
+
+  });
+});
+
+
+
+ipcMain.on("setUserPCName", (event, args) => {
+  fs.readFile("path/to/file", (error, data) => {
+
+    store.set("UserPCName", args);
+
+  });
+});
+
+// ipcMain.on("getIntensityPref", (event, args) => {
+//   fs.readFile("path/to/file", (error, data) => {
+//     console.log("Ran request")
+//   const value =  store.get("IntensityPref");
+
+//   console.log(value)
+//   mainWindow.webContents.send("getIntensityPref", value);
   
-  // app.on('ready', () => {
-  //   tray = new Tray(path.join(__dirname, iconPath));
-  
-  //   tray.setContextMenu(Menu.buildFromTemplate([
-  //     {
-  //       label: 'Show App', click: function () {
-  //         mainWindow.show();
-  //       }
-  //     },
-  //     {
-  //       label: 'Quit', click: function () {
-  //         isQuiting = true;
-  //         app.quit();
-  //       }
-  //     }
-  //   ]));
-  
+//   });
+// });
+
+ipcMain.handle('getStoreValue', (event, key) => {
+  //console.log("updated");
+  //console.log(store.get(key))
+	return store.get(key);
+});
+
 //   app.on('before-quit' , (e) => {
 //     find('port', 3000)
 //       .then(function (list) {

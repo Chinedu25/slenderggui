@@ -10,18 +10,21 @@ contextBridge.exposeInMainWorld(
         //send: (channel, data) => {
         send: (channel, data) => {
             // whitelist channels
-            let validChannels = ["minimize", "closeApp", 'shrink-window', 'resize-window'];
+            let validChannels = ["minimize", "closeApp", 'shrink-window', 'resize-window', "setIntensityPref", "setUserPCName"];
             if (validChannels.includes(channel)) {
                 ipcRenderer.send(channel, data);
             }
         },
         //receive: (channel, func) => {
-        response: (channel, func) => {
-            let validChannels = ["fromMain"];
+        receive: (channel, func) => {
+            let validChannels = ["getIntensityPref"];
             if (validChannels.includes(channel)) {
                 // Deliberately strip event as it includes `sender` 
                 ipcRenderer.on(channel, (event, ...args) => func(...args));
             }
+        },
+        invoke: async (channel, data) =>{
+            return await ipcRenderer.invoke(channel, data);
         }
     }
 );

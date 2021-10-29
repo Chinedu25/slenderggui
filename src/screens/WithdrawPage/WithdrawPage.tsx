@@ -192,7 +192,7 @@ const WithdrawPage = ({ history }: RouteComponentProps<TParams>) => {
 
                                             return (
                                                 //@ts-ignore
-                                                <WithdrawHistory message={data.message}title={data.title} amount={data.amount} date={data.date} type={data.type}
+                                                <WithdrawHistory key={key} message={data.message}title={data.title} amount={data.amount} date={data.date} type={data.type}
                                                 />
                                             )
                                         }).reverse()

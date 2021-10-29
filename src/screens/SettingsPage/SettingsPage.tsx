@@ -34,6 +34,8 @@ const SettingsPage = ({ history }: RouteComponentProps<TParams>) => {
     //@ts-ignore
     const ipc = window.api;
 
+ 
+
     return (
         <div className="backgroundContainer">
             <div style={{ flexDirection: "row", display: "flex" }}>

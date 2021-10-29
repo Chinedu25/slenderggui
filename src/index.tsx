@@ -7,9 +7,8 @@ import './assets/fonts/exo2font/Exo2-Regular.ttf';
 
 
 ReactDOM.render(
-  <React.StrictMode>
     <App />
-  </React.StrictMode>,
+  ,
   document.getElementById('root')
 );
 
