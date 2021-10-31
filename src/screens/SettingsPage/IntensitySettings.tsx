@@ -6,13 +6,11 @@ import IntensityIconLow from "../../assets/images/IntensityIconLow.png"
 import IntensityIconHigh from "../../assets/images/IntensityIconHigh.png"
 import IntensityIconUltra from "../../assets/images/IntensityIconUltra.png"
 
-import {useState, useRef,useEffect} from "react"
+import {useState, useEffect} from "react"
 
    //@ts-ignore
    const ipc = window.api;
 
-
-//let getSliderValuePref = 0;
 
 const IntensitySettings = () => {
 
@@ -24,7 +22,8 @@ const IntensitySettings = () => {
         
     ipc.invoke("getStoreValue", "IntensityPref").then((response:any)=>{
         // console.log(response)
-         setSliderValue(response);
+        if (response !== undefined || response != null)
+            setSliderValue(response);
         
      });
 

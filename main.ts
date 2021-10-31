@@ -1,6 +1,6 @@
 const path = require('path');
 
-const { app, Tray,Menu,BrowserWindow , ipcMain} = require('electron');
+const { app,nativeImage ,Tray,Menu,BrowserWindow , ipcMain} = require('electron');
 const isDev = require('electron-is-dev');
 const find = require('find-process');
 const fs = require("fs");
@@ -16,6 +16,9 @@ let tray = null;
 const iconPath = process.platform !== 'darwin'
     ? 'src/assets/icons/logo.ico'
     : 'src/assets/icons/logo.icns';
+    
+// let macIcon = nativeImage.createFromPath(app.getAppPath() + iconPath);
+
 
 function createWindow() {
   // Create the browser window.
@@ -23,7 +26,7 @@ function createWindow() {
     width: 800,
     height: 500,
     frame: false,
-    icon:iconPath,
+    icon: iconPath,
     transparent: true,
     titleBarStyle: 'customButtonsOnHover',
     webPreferences: {
@@ -38,6 +41,7 @@ function createWindow() {
       resizable: false,
 
   });
+
 
  
   //mainWindow.maximize();
@@ -121,15 +125,15 @@ ipcMain.handle('getStoreValue', (event, key) => {
 // });
 
 
-var contextMenu = Menu.buildFromTemplate([
-  { label: 'Show App', click:  function(){
-      mainWindow.show();
-  } },
-  { label: 'Quit', click:  function(){
-      app.isQuiting = true;
-      app.quit();
-  } }
-]);
+// var contextMenu = Menu.buildFromTemplate([
+//   { label: 'Show App', click:  function(){
+//       mainWindow.show();
+//   } },
+//   { label: 'Quit', click:  function(){
+//       app.isQuiting = true;
+//       app.quit();
+//   } }
+// ]);
   
   // Quit when all windows are closed, except on macOS. There, it's common
   // for applications and their menu bar to stay active until the user quits
@@ -146,11 +150,20 @@ app.on('restore', function (event) {
 });
 
 function createTray() {
+
+    // let trayIcon = nativeImage.createFromPath(app.getAppPath() + iconPath);
+    // // if needed resize to 16x16 but mac also accepted the 24 icon
+    // trayIcon = trayIcon.resize({
+    //    width: 16,
+    //    height: 16
+    //  });
   let appIcon = new Tray(iconPath);
+
   const contextMenu = Menu.buildFromTemplate([
       {
           label: 'Show', click: function () {
               mainWindow.show();
+       
           }
       },
       {
@@ -163,6 +176,7 @@ function createTray() {
 
   appIcon.on('double-click', function (event) {
       mainWindow.show();
+ 
   });
   appIcon.setToolTip('SlenderGG');
   appIcon.setContextMenu(contextMenu);
@@ -171,8 +185,10 @@ function createTray() {
 
 
 
+
 ipcMain.on("minimize", (event, args) => {
     mainWindow.minimize();
+  
     // Send result back to renderer process
    // mainWindow.webContents.send("fromMain", "responseOj");
   });
@@ -183,7 +199,9 @@ ipcMain.on("closeApp", (event, args) => {
     if (!isQuiting) {
       event.preventDefault();
       mainWindow.hide();
-      tray = createTray();
+
+      if (tray == null)
+          tray = createTray();
     }
   });
 
