@@ -1,0 +1,92 @@
+.withdrawContentBox{
+    background: rgba(35, 46, 67, 0.7);
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 4px;
+    width: 406px;
+    height: 429px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.withdrawalStatus{
+    background: rgba(26, 33, 46, 0.7);
+box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+width: 366px;
+height: 93px;
+margin-top: 18px;
+}
+
+.withdrawalStatusImg{
+    width: 25px;
+    height: 25px;
+    margin-left: 14px;
+}
+
+.withdrawSubtitle{
+    color: #fff;
+    font-family: "Exo2Medium";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 22px;
+    margin-left: 20px;
+    text-align: left;
+}
+
+.withdrawMessage{
+    color: #fff;
+    font-family: "Exo2Medium";
+    font-weight: 300;
+    font-size: 13px;
+    margin-left: 60px;
+    margin-top: 4px;
+    text-align: left;
+    display: flex;
+}
+
+.withdrawGuide{
+    background: rgba(26, 33, 46, 0.7);
+box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+height: 151px;
+width: 366px;
+margin-top: 8px;
+}
+
+.withdrawHistoryItem{
+    background: rgba(26, 33, 46, 0.7);
+box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+width: 366px;
+height: 71px;
+margin-bottom: 8px;
+}
+
+.withdrawHisTitle{
+    font-family: "Exo2Medium";
+    width: 300px;
+    text-align: left;
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+color: #FFFFFF;
+}
+
+.noWithdrawFound{
+
+background: rgba(26, 33, 46, 0.7);
+box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+border-radius: 4px;
+width: 366px;
+height: 45px;
+display: flex;
+color: #fff;
+text-align: center;
+align-items: center;
+font-family: "Exo2Medium";
+font-style: normal;
+font-weight: 300;
+font-size: 18px;
+}

@@ -1,0 +1,19 @@
+.inputText {
+    width: 220px;
+    margin: 7px 0px;
+    padding: 10px;
+    background: #272D3C;
+    border: 1px solid #272D3C;
+    box-sizing: border-box;
+    border-radius: 4px;
+    border-bottom: 1px solid #979AA1;
+    font-family: "Exo2Medium";
+    font-size: 18px;
+    color: #fff;
+    font-weight: normal;
+  }
+  
+  .inputText:focus {
+    border-bottom: 1px solid #4CC2FF;
+    outline: black;
+  }

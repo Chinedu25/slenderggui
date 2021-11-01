@@ -1,0 +1,114 @@
+.container{
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    background: rgba(26, 32, 48, 0.8);
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    border-radius: 10px;
+    /* backdrop-filter: blur(100px); */
+}
+.view{
+   flex: 1;
+}
+
+.minimizeBox{
+    position: "absolute";
+    height: 35px;
+    width: 57px;
+display: flex;
+margin-left: 680px;
+justify-content: center;
+cursor: pointer;
+align-items: center;
+}
+.minimizeBox:hover{
+    background-color: #FFAA00;
+}
+
+.closeBox{
+    position: "absolute";
+    height: 35px;
+    width: 57px;
+display: flex;
+margin-left: 10px;
+justify-content: center;
+cursor: pointer;
+align-items: center;
+}
+.closeBox:hover{
+    background-color: red;
+}
+
+.logo{
+    position: absolute;
+    margin-top: 13px;
+    margin-left: 20px;
+    left: 0%;
+}
+
+.largeLogo{
+    margin-top: 24px;
+}
+
+.slendergg{
+   font-size: 18px;
+   color: #fff;
+   font-weight: 400;
+   font-family: "Exo2Medium";
+   margin-top: 0px;
+}
+
+.initialLoadText{
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    margin-left: 16px;
+    font-family: "Exo2Medium";
+}
+.initialLoad{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 74px;
+}
+.loginMessage{
+   font-size: 18px;
+    color: #fff;
+    font-weight: 400;
+    font-family: "Exo2Medium";
+    margin-top: 0px; 
+}
+
+.disclaimerText{
+    color: white;
+    font-family: "Exo2Medium";
+    font-size: 13px;
+    line-height: 16px;
+    font-weight: normal;
+    margin-top: 30px;
+}
+
+.pleaseWait{
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    margin-left: 16px;
+    font-family: "Exo2Medium";
+    
+}
+
+.loginFailed{
+    color: #fff;
+    font-size: 18px;
+    justify-content: center;
+    text-align: center;
+    margin: 67px 84.5px;
+    font-weight: normal;
+    font-family: "Exo2Medium";
+}
