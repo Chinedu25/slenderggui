@@ -64,8 +64,8 @@ const installExtensions = async () => {
 };
 
 const RESOURCES_PATH = app.isPackaged
-? path.join(process.resourcesPath, 'assets')
-: path.join(__dirname, '../../assets');
+  ? path.join(process.resourcesPath, 'assets')
+  : path.join(__dirname, '../../assets');
 
 const getAssetPath = (...paths: string[]): string => {
   return path.join(RESOURCES_PATH, ...paths);
@@ -77,22 +77,22 @@ const createWindow = async () => {
   }
 
   mainWindow = new BrowserWindow({
-     show: false,
-      width: 800,
-      height: 500,
-      frame: false,
+    show: false,
+    width: 800,
+    height: 500,
+    frame: false,
     icon: getAssetPath('icon.png'),
     transparent: true,
-       titleBarStyle: 'customButtonsOnHover',
-          resizable: false,
-          fullscreen: false,
+    titleBarStyle: 'customButtonsOnHover',
+    resizable: false,
+    fullscreen: false,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
-                  nodeIntegration: false,
- 
-            //@ts-ignore
-            enableRemoteModule: true,
-            contextIsolation: true,
+      nodeIntegration: false,
+
+      //@ts-ignore
+      enableRemoteModule: true,
+      contextIsolation: true,
     },
   });
 
@@ -133,9 +133,9 @@ const createWindow = async () => {
   new AppUpdater();
 };
 
-    app.on('before-quit', function () {
-      isQuiting = true;
-    });
+app.on('before-quit', function () {
+  isQuiting = true;
+});
 
 /**
  * Add event listeners...
@@ -157,122 +157,104 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.whenReady().then(() => {
+app
+  .whenReady()
+  .then(() => {
     createWindow();
     app.on('activate', () => {
       // On macOS it's common to re-create a window in the app when the
       // dock icon is clicked and there are no other windows open.
       if (mainWindow === null) createWindow();
-
-    
-
-      
     });
-  }).catch(console.log);
+  })
+  .catch(console.log);
 
+function createTray() {
+  // let trayIcon = nativeImage.createFromPath(app.getAppPath() + iconPath);
+  // // if needed resize to 16x16 but mac also accepted the 24 icon
+  // trayIcon = trayIcon.resize({
+  //    width: 16,
+  //    height: 16
+  //  });
+  let appIcon = new Tray(getAssetPath('icon.png'));
 
-  function createTray() {
-  
-      // let trayIcon = nativeImage.createFromPath(app.getAppPath() + iconPath);
-      // // if needed resize to 16x16 but mac also accepted the 24 icon
-      // trayIcon = trayIcon.resize({
-      //    width: 16,
-      //    height: 16
-      //  });
-    let appIcon = new Tray(getAssetPath('icon.png'));
-  
-    const contextMenu = Menu.buildFromTemplate([
-        {
-            label: 'Show', click: function () {
-              if (mainWindow != null)
-                  mainWindow.show();
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: 'Show',
+      click: function () {
+        if (mainWindow != null) mainWindow.show();
 
-                  tray?.destroy();
-            }
-        },
-        {
-            label: 'Exit', click: function () {
-                isQuiting = true;
-                app.quit();
-            }
-        }
-    ]);
-  
-    appIcon.on('double-click', function () {
-      if(mainWindow != null)
-        mainWindow.show();
-      
-      tray?.destroy();
-   
-    });
-    appIcon.setToolTip('SlenderGG');
-    appIcon.setContextMenu(contextMenu);
-    return appIcon;
+        tray?.destroy();
+        tray = null;
+      },
+    },
+    {
+      label: 'Exit',
+      click: function () {
+        isQuiting = true;
+        app.quit();
+      },
+    },
+  ]);
+
+  appIcon.on('double-click', function () {
+    if (mainWindow != null) mainWindow.show();
+
+    tray?.destroy();
+    tray = null;
+  });
+  appIcon.setToolTip('SlenderGG');
+  appIcon.setContextMenu(contextMenu);
+  return appIcon;
+}
+
+//@ts-ignore
+ipcMain.on('setIntensityPref', (event, args) => {
+  store.set('IntensityPref', args);
+});
+
+//@ts-ignore
+ipcMain.on('setUserPCName', (event, args) => {
+  store.set('UserPCName', args);
+});
+
+//@ts-ignore
+ipcMain.handle('getStoreValue', (event, key) => {
+  //console.log("updated");
+  //console.log(store.get(key))
+  return store.get(key);
+});
+
+ipcMain.on('minimize', () => {
+  if (mainWindow != null) mainWindow.minimize();
+
+  // Send result back to renderer process
+  // mainWindow.webContents.send("fromMain", "responseOj");
+});
+
+ipcMain.on('closeApp', (event) => {
+  if (!isQuiting) {
+    event.preventDefault();
+    if (mainWindow != null) mainWindow.hide();
+
+    if (tray == null) tray = createTray();
   }
+});
 
-  //@ts-ignore
-    ipcMain.on("setIntensityPref", (event, args) => {
-  
-  
-      store.set("IntensityPref", args);
-  
-  });
+ipcMain.on('shrink-window', () => {
+  if (mainWindow != null) {
+    mainWindow.setSize(800, 500);
 
-    //@ts-ignore
-  ipcMain.on("setUserPCName", (event, args) => {
-  
-      store.set("UserPCName", args);
-  });
-  
-    //@ts-ignore
-  ipcMain.handle('getStoreValue', (event, key) => {
-    //console.log("updated");
-    //console.log(store.get(key))
-    return store.get(key);
-  });
+    mainWindow.setBounds({ width: 800, height: 500 });
+    mainWindow.setMaximumSize(800, 500);
+    mainWindow.center();
+  }
+});
 
-
-  
-  ipcMain.on("minimize", () => {
-    if (mainWindow != null)
-      mainWindow.minimize();
-    
-      // Send result back to renderer process
-     // mainWindow.webContents.send("fromMain", "responseOj");
-    });
-  
-  
-  ipcMain.on("closeApp", (event) => {
-  
-      if (!isQuiting) {
-        event.preventDefault();
-        if (mainWindow != null)
-        mainWindow.hide();
-  
-        if (tray == null)
-            tray = createTray();
-      }
-    });
-  
-  
-  ipcMain.on('shrink-window', () => {
-    if (mainWindow != null){
-     
-      mainWindow.setSize(800, 500)
-
-      mainWindow.setBounds({width: 800, height: 500 })
-      mainWindow.setMaximumSize(800, 500)
-      mainWindow.center();
-    }
-    });
-  
-  
-  
-  ipcMain.on('resize-window', () => {
-    if (mainWindow != null){
-      mainWindow.setSize(1280,768);
-      // mainWindow.setResizable(true);
-       mainWindow.center();
-    }
-    });
-  
+ipcMain.on('resize-window', () => {
+  if (mainWindow != null) {
+    mainWindow.setSize(1280, 768);
+    // mainWindow.setResizable(true);
+    mainWindow.center();
+  }
+});
