@@ -18,6 +18,7 @@ import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
 
 const Store = require('electron-store');
+
 const store = new Store();
 
 export default class AppUpdater {
@@ -28,7 +29,7 @@ export default class AppUpdater {
   }
 }
 
-let isQuiting: Boolean;
+let isQuiting: boolean;
 let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
 
@@ -90,7 +91,7 @@ const createWindow = async () => {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: false,
 
-      //@ts-ignore
+      // @ts-ignore
       enableRemoteModule: true,
       contextIsolation: true,
     },
@@ -176,12 +177,12 @@ function createTray() {
   //    width: 16,
   //    height: 16
   //  });
-  let appIcon = new Tray(getAssetPath('icon.png'));
+  const appIcon = new Tray(getAssetPath('icon.png'));
 
   const contextMenu = Menu.buildFromTemplate([
     {
       label: 'Show',
-      click: function () {
+      click() {
         if (mainWindow != null) mainWindow.show();
 
         tray?.destroy();
@@ -190,7 +191,7 @@ function createTray() {
     },
     {
       label: 'Exit',
-      click: function () {
+      click() {
         isQuiting = true;
         app.quit();
       },
@@ -208,28 +209,21 @@ function createTray() {
   return appIcon;
 }
 
-//@ts-ignore
+// @ts-ignore
 ipcMain.on('setIntensityPref', (event, args) => {
   store.set('IntensityPref', args);
 });
 
-//@ts-ignore
-ipcMain.on('setUserPCName', (event, args) => {
+ipcMain.on('setUserPCName', (_, args) => {
   store.set('UserPCName', args);
 });
 
-//@ts-ignore
-ipcMain.handle('getStoreValue', (event, key) => {
-  //console.log("updated");
-  //console.log(store.get(key))
+ipcMain.handle('getStoreValue', (_, key) => {
   return store.get(key);
 });
 
 ipcMain.on('minimize', () => {
   if (mainWindow != null) mainWindow.minimize();
-
-  // Send result back to renderer process
-  // mainWindow.webContents.send("fromMain", "responseOj");
 });
 
 ipcMain.on('closeApp', (event) => {
@@ -254,7 +248,6 @@ ipcMain.on('shrink-window', () => {
 ipcMain.on('resize-window', () => {
   if (mainWindow != null) {
     mainWindow.setSize(1280, 768);
-    // mainWindow.setResizable(true);
     mainWindow.center();
   }
 });
