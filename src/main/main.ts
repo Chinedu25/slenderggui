@@ -41,11 +41,13 @@ let isQuiting: boolean;
 let tray: Tray | null = null;
 let mainWindow: BrowserWindow | null = null;
 
-// ipcMain.on('ipc-example', async (event, arg) => {
-//   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
-//   console.log(msgTemplate(arg));
-//   event.reply('ipc-example', msgTemplate('pong'));
-// });
+function closeApp() {
+  if (!isQuiting) {
+    if (mainWindow != null) mainWindow.hide();
+
+    if (tray == null) tray = createTray();
+  }
+}
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -128,7 +130,7 @@ const createWindow = async () => {
   //   }
   // });
 
-  const menuBuilder = new MenuBuilder(mainWindow);
+  const menuBuilder = new MenuBuilder(mainWindow, closeApp);
   menuBuilder.buildMenu();
 
   // Open urls in the user's browser
@@ -237,9 +239,7 @@ ipcMain.on('minimize', () => {
 ipcMain.on('closeApp', (event) => {
   if (!isQuiting) {
     event.preventDefault();
-    if (mainWindow != null) mainWindow.hide();
-
-    if (tray == null) tray = createTray();
+    closeApp();
   }
 });
 
