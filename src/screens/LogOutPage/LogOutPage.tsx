@@ -1,9 +1,9 @@
 import "../HomePage/HomePage.css"
 import "./LogOutPage.css"
-import ExclamationFailedIcon from "../../assets/images/ExclamationFailedIcon.png"
+import ExclamationFailedIcon from "../../../assets/images/ExclamationFailedIcon.png"
 import HomeActionBar from "../../components/Header/HomeActionBar"
 import SideBar from "../../components/SideBar/SideBar"
-
+import BGImage from '../../../assets/images/HomeBackground.png'
 import {
     RouteComponentProps
 } from "react-router-dom";
@@ -25,7 +25,7 @@ const LogOutPage = ({ history }: RouteComponentProps<TParams>) => {
     }
 
     return (
-        <div className="backgroundContainer">
+        <div className="backgroundContainer" style={{backgroundImage:`url(${BGImage})`}}>
             <HomeActionBar />
             <div className="View">
                 <SideBar screen={"logoutpage"} history={history} />

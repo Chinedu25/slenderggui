@@ -1,14 +1,14 @@
 import "../../screens/HomePage/HomePage.css"
-import ProfileImage from '../../assets/images/ProfileImage.png'
+import ProfileImage from '../../../assets/images/ProfileImage.png'
 import SideButton from "../../components/Button/SideButton"
-import HomeIcon from "../../assets/images/HomeIcon.png"
-import SignOutIcon from "../../assets/images/SignOutIcon.png"
-import WithDrawIcon from "../../assets/images/WithdrawIcon.png"
-import SettingsIcon from "../../assets/images/SettingsIcon.png"
-import DiscordIcon from "../../assets/images/DiscordIcon.png"
-import InstagramIcon from "../../assets/images/InstagramIcon.png"
-import TikTokIcon from "../../assets/images/TikTokIcon.png"
-import YouTubeIcon from "../../assets/images/YouTubeIcon.png"
+import HomeIcon from "../../../assets/images/HomeIcon.png"
+import SignOutIcon from "../../../assets/images/SignOutIcon.png"
+import WithDrawIcon from "../../../assets/images/WithdrawIcon.png"
+import SettingsIcon from "../../../assets/images/SettingsIcon.png"
+import DiscordIcon from "../../../assets/images/DiscordIcon.png"
+import InstagramIcon from "../../../assets/images/InstagramIcon.png"
+import TikTokIcon from "../../../assets/images/TikTokIcon.png"
+import YouTubeIcon from "../../../assets/images/YouTubeIcon.png"
 
 import {
 

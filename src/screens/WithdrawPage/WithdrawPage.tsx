@@ -1,10 +1,10 @@
 import "./WithdrawPage.css"
 import "../HomePage/HomePage.css"
 
-import HelpIcon from "../../assets/images/HelpIcon.png"
+import HelpIcon from "../../../assets/images/HelpIcon.png"
 import TextInput from "../../components/TextInput/TextInput"
-import ProcessingIcon from "../../assets/images/ProcessingIcon.png"
-import WithdrawalCompleteIcon from "../../assets/images/WithdrawalCompleteIcon.png"
+import ProcessingIcon from "../../../assets/images/ProcessingIcon.png"
+import WithdrawalCompleteIcon from "../../../assets/images/WithdrawalCompleteIcon.png"
 import HomeActionBar from "../../components/Header/HomeActionBar"
 
 import { useState } from "react"
@@ -16,6 +16,7 @@ import fakeWithdrawHistory from "./fakeWithdrawHistory"
 
 import SideBar from "../../components/SideBar/SideBar"
 import WithdrawHistory from "./WithdrawHistory"
+import BGImage from '../../../assets/images/HomeBackground.png'
 
 import {
 
@@ -33,7 +34,7 @@ const WithdrawPage = ({ history }: RouteComponentProps<TParams>) => {
    // const ipc = window.api;
 
     return (
-        <div className="backgroundContainer">
+        <div className="backgroundContainer" style={{backgroundImage:`url(${BGImage})`}}>
             <HomeActionBar />
             <div className="View">
                 <SideBar screen={"withdrawpage"} history={history} />

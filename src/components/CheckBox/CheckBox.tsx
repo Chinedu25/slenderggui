@@ -1,5 +1,5 @@
-import {ReactComponent as UncheckedBox} from '../../assets/images/CheckBox.svg';
-import {ReactComponent as MarkedCheckBox} from '../../assets/images/MarkedCheckBox.svg';
+import  UncheckedBox from '../../../assets/images/CheckBox.svg';
+import MarkedCheckBox from '../../../assets/images/MarkedCheckBox.svg';
 type CheckBoxProps ={
     value : Boolean,
     onClick: any,
@@ -15,9 +15,9 @@ const CheckBox = ({value, style ,onClick}:CheckBoxProps)=>{
         onClick={onClick}>
             {
                 value === true ?
-                <MarkedCheckBox/>
+                <img src={MarkedCheckBox} alt=""/>
                 :
-            <UncheckedBox />
+            <img src={UncheckedBox} alt=""/>
             }
 
         </div>

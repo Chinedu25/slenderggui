@@ -4,13 +4,14 @@ import {
 } from "react-router-dom";
 
 import "./login.css";
-import Logo from '../../assets/images/Logo.svg'
-import LargeLogo from '../../assets/images/slenderggLogoHair.svg'
+import Logo from '../../../assets/images/Logo.svg'
+import LargeLogo from '../../../assets/images/slenderggLogoHair.svg'
 import TextInput from "../../components/TextInput/TextInput";
 import Button from "../../components/Button/Button";
 import ClipLoader from "react-spinners/ClipLoader";
-import CloseIcon from "../../assets/images/CloseIcon.svg"
-import MinimizeIcon from "../../assets/images/MinimizeIcon.svg"
+import CloseIcon from "../../../assets/images/CloseIcon.svg"
+import MinimizeIcon from "../../../assets/images/MinimizeIcon.svg"
+import BGLoginImage from '../../../assets/images/loginBGImage.png';
 
 type TParams = { id: string };
 
@@ -44,7 +45,7 @@ const Login = ({ history }: RouteComponentProps<TParams>) => {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{backgroundImage: `url(${BGLoginImage})`}}>
 
             <div className="view">
 

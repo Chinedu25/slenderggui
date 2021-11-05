@@ -1,6 +1,6 @@
-import CloseIcon from "../../assets/images/CloseIcon.svg"
-import MinimizeIcon from "../../assets/images/MinimizeIcon.svg"
-import Logo from '../../assets/images/Logo.svg'
+import CloseIcon from "../../../assets/images/CloseIcon.svg"
+import MinimizeIcon from "../../../assets/images/MinimizeIcon.svg"
+import Logo from '../../../assets/images/Logo.svg'
 import '../../screens/HomePage/HomePage.css'
 
 //@ts-ignore

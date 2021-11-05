@@ -1,9 +1,9 @@
 import "./WithdrawPage.css"
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
-import ProcessingIcon from "../../assets/images/ProcessingIcon.png"
-import WithdrawalCompleteIcon from "../../assets/images/WithdrawalCompleteIcon.png"
-import OfflineIcon from  '../../assets/images/OfflineIcon.png' 
+import ProcessingIcon from "../../../assets/images/ProcessingIcon.png"
+import WithdrawalCompleteIcon from "../../../assets/images/WithdrawalCompleteIcon.png"
+import OfflineIcon from  '../../../assets/images/OfflineIcon.png' 
 
 type WithdrawHistoryProps ={
     title: string,

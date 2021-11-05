@@ -1,6 +1,6 @@
-import PCIcon from '../../assets/images/PCIcon.png'
-import EditIcon from '../../assets/images/EditIcon.png'
-import RefreshIcon from '../../assets/images/RefreshIcon.png'
+import PCIcon from '../../../assets/images/PCIcon.png'
+import EditIcon from '../../../assets/images/EditIcon.png'
+import RefreshIcon from '../../../assets/images/RefreshIcon.png'
 
 import { useState, useEffect } from 'react'
 import TextInput from '../../components/TextInput/TextInput'
@@ -20,7 +20,8 @@ const RenamePC = () => {
      
             if (response){
                 if (response.length !== 0){
-                    setUserPCName(response); 
+                    
+                   setUserPCName(response); 
                 }
             }
     

@@ -1,7 +1,7 @@
-import DailyRobloxIcon from "../../assets/images/DailyRobloxIcon.png"
-import SystemRobloxIcon from "../../assets/images/SystemRobloxIcon.png"
-import BalanceIcon from "../../assets/images/BalanceIcon.png"
-import PendingIcon from "../../assets/images/PendingIcon.png"
+import DailyRobloxIcon from "../../../assets/images/DailyRobloxIcon.png"
+import SystemRobloxIcon from "../../../assets/images/SystemRobloxIcon.png"
+import BalanceIcon from "../../../assets/images/BalanceIcon.png"
+import PendingIcon from "../../../assets/images/PendingIcon.png"
 
 type StatusBarProp={
     marginTop: number

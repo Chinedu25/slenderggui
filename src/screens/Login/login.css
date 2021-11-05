@@ -5,11 +5,12 @@
     padding: 0;
     position: absolute;
     background: rgba(26, 32, 48, 0.8);
-    background-image: url('../../assets/images/loginBGImage.png');
     background-position: center; 
     background-size: cover;
     background-repeat: no-repeat;
-    backdrop-filter: blur(100px);
+    overflow: hidden;
+    border-radius: 10px;
+    /* backdrop-filter: blur(100px); */
 }
 .view{
    flex: 1;

@@ -4,10 +4,12 @@
     margin: 0;
     padding: 0;
     position: absolute;
-    background-image: url('../../assets/images/HomeBackground.png');
+    background-image: url('../../../assets/images/HomeBackground.png');
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+    overflow: hidden;
+    border-radius: 10px;
 }
 
 .logo{

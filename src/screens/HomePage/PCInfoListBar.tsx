@@ -1,10 +1,10 @@
-import AmdCPUIcon from '../../assets/images/amdCpu.png'
-import GPUIcon from '../../assets/images/GPUIcon.png'
-import PCIcon from '../../assets/images/PCIcon.png'
+import AmdCPUIcon from '../../../assets/images/amdCpu.png'
+import GPUIcon from '../../../assets/images/GPUIcon.png'
+import PCIcon from '../../../assets/images/PCIcon.png'
 import Tippy from '@tippyjs/react'
 import 'tippy.js/dist/tippy.css'
-import OnlineIcon from  '../../assets/images/OnlineIcon.png' 
-import OfflineIcon from  '../../assets/images/OfflineIcon.png' 
+import OnlineIcon from  '../../../assets/images/OnlineIcon.png' 
+import OfflineIcon from  '../../../assets/images/OfflineIcon.png' 
 import CheckBox from '../../components/CheckBox/CheckBox'
 
 

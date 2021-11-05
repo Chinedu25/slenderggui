@@ -1,7 +1,7 @@
 import "./WithdrawPage.css";
-import ExclamationIcon from "../../assets/images/ExclamationIcon.png"
-import ExclamationSuccessIcon from "../../assets/images/ExclamationSuccessIcon.png"
-import ExclamationFailedIcon from "../../assets/images/ExclamationFailedIcon.png"
+import ExclamationIcon from "../../../assets/images/ExclamationIcon.png"
+import ExclamationSuccessIcon from "../../../assets/images/ExclamationSuccessIcon.png"
+import ExclamationFailedIcon from "../../../assets/images/ExclamationFailedIcon.png"
 
 
 type StatusType = {

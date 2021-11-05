@@ -1,4 +1,4 @@
-import React from "react";
+
 import "./TextInput.css";
 
 type TextInputProps ={

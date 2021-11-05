@@ -1,10 +1,10 @@
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import "./SettingsPage.css"
-import IntensityIconMedium from "../../assets/images/IntensityIconMedium.png"
-import IntensityIconLow from "../../assets/images/IntensityIconLow.png"
-import IntensityIconHigh from "../../assets/images/IntensityIconHigh.png"
-import IntensityIconUltra from "../../assets/images/IntensityIconUltra.png"
+import IntensityIconMedium from "../../../assets/images/IntensityIconMedium.png"
+import IntensityIconLow from "../../../assets/images/IntensityIconLow.png"
+import IntensityIconHigh from "../../../assets/images/IntensityIconHigh.png"
+import IntensityIconUltra from "../../../assets/images/IntensityIconUltra.png"
 
 import {useState, useEffect} from "react"
 
@@ -22,8 +22,11 @@ const IntensitySettings = () => {
         
     ipc.invoke("getStoreValue", "IntensityPref").then((response:any)=>{
         // console.log(response)
-        if (response !== undefined || response != null)
+        if (response !== undefined || response != null){
+
             setSliderValue(response);
+        }
+ 
         
      });
 

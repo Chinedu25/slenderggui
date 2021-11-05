@@ -1,7 +1,7 @@
 import "./HomePage.css"
-import HelpIcon from "../../assets/images/HelpIcon.png"
-import StaticRings from "../../assets/images/StaticRings.png"
-import RotatingRingsActive from "../../assets/images/RotatingRingsActive.png"
+import HelpIcon from "../../../assets/images/HelpIcon.png"
+import StaticRings from "../../../assets/images/StaticRings.png"
+import RotatingRingsActive from "../../../assets/images/RotatingRingsActive.png"
 import HomeActionBar from "../../components/Header/HomeActionBar"
 import SideBar from "../../components/SideBar/SideBar"
 import PCInfoListBar from "./PCInfoListBar"
@@ -11,6 +11,7 @@ import {
 } from "react-router-dom";
 import ChartMap from "./ChartMap"
 import StatusBar from "../../components/StatusBar/StatusBar"
+import BGImage from '../../../assets/images/HomeBackground.png'
 
 
 type TParams = { id: string };
@@ -30,7 +31,7 @@ const HomePage = ({ history }: RouteComponentProps<TParams>) => {
 
 
     return (
-        <div className="backgroundContainer">
+        <div className="backgroundContainer" style={{backgroundImage:`url(${BGImage})`}}>
             <HomeActionBar />
 
             <div className="View">

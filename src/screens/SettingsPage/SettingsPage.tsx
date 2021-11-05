@@ -1,9 +1,8 @@
 import "../HomePage/HomePage.css"
 import "./SettingsPage.css"
-import DiscordIcon from "../../assets/images/DiscordIcon.png"
-import HelpIcon from "../../assets/images/HelpIcon.png"
-import SlenderGGLogoSmall from "../../assets/images/SlenderGGLogoSmall.svg"
-
+import DiscordIcon from "../../../assets/images/DiscordIcon.png"
+import HelpIcon from "../../../assets/images/HelpIcon.png"
+import SlenderGGLogoSmall from "../../../assets/images/SlenderGGLogoSmall.svg"
 import HomeActionBar from "../../components/Header/HomeActionBar"
 import SideBar from "../../components/SideBar/SideBar"
 import {
@@ -13,6 +12,7 @@ import IntensitySettings from "./IntensitySettings"
 import RenamePC from "./RenamePC"
 import FlatButton from "../../components/Button/FlatButton"
 import StatusBar from "../../components/StatusBar/StatusBar"
+import BGImage from '../../../assets/images/HomeBackground.png'
 
 
 type TParams = { id: string };
@@ -25,7 +25,7 @@ const SettingsPage = ({ history }: RouteComponentProps<TParams>) => {
 
 
     return (
-        <div className="backgroundContainer">
+        <div className="backgroundContainer" style={{backgroundImage:`url(${BGImage})`}}>
             <HomeActionBar />
             <div className="View">
                 <SideBar screen={"settingspage"} history={history} />
