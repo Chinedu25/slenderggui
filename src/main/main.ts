@@ -11,7 +11,15 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow, shell, Menu, Tray, ipcMain } from 'electron';
+import {
+  app,
+  BrowserWindow,
+  shell,
+  nativeImage,
+  Menu,
+  Tray,
+  ipcMain,
+} from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -171,13 +179,13 @@ app
   .catch(console.log);
 
 function createTray() {
-  // let trayIcon = nativeImage.createFromPath(app.getAppPath() + iconPath);
-  // // if needed resize to 16x16 but mac also accepted the 24 icon
-  // trayIcon = trayIcon.resize({
-  //    width: 16,
-  //    height: 16
-  //  });
-  const appIcon = new Tray(getAssetPath('icon.png'));
+  let trayIcon = nativeImage.createFromPath(getAssetPath('icon.png'));
+  // if needed resize to 16x16 but mac also accepted the 24 icon
+  trayIcon = trayIcon.resize({
+    width: 16,
+    height: 16,
+  });
+  const appIcon = new Tray(trayIcon);
 
   const contextMenu = Menu.buildFromTemplate([
     {
