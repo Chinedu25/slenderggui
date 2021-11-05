@@ -171,6 +171,7 @@ export default class MenuBuilder {
   }
 
   buildDefaultTemplate() {
+    const { close } = this;
     const templateDefault: MenuItemConstructorOptions[] = [
       {
         label: '&File',
@@ -181,7 +182,9 @@ export default class MenuBuilder {
           },
           {
             label: '&Close',
-            click: () => {},
+            click: () => {
+              close();
+            },
           },
         ],
       },
