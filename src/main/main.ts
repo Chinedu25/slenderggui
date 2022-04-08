@@ -110,7 +110,8 @@ const createWindow = async () => {
   });
 
   mainWindow.on('closed', () => {
-    mainWindow = null;
+   mainWindow = null;
+   
   });
 
   // mainWindow.webContents.on("did-frame-finish-load", async () => {
@@ -128,6 +129,14 @@ const createWindow = async () => {
     shell.openExternal(url);
   });
 
+  mainWindow.on("close", function(event){
+    if (!isQuiting){
+         if (mainWindow != null) mainWindow.hide();
+         event.preventDefault();
+    if (tray == null) tray = createTray(); 
+    }
+  })
+
   // Remove this if your app does not use auto updates
   // eslint-disable-next-line
   new AppUpdater();
@@ -135,6 +144,7 @@ const createWindow = async () => {
 
 app.on('before-quit', function () {
   isQuiting = true;
+  
 });
 
 /**
@@ -232,9 +242,10 @@ ipcMain.on('minimize', () => {
   // mainWindow.webContents.send("fromMain", "responseOj");
 });
 
-ipcMain.on('closeApp', (event) => {
+ipcMain.on('closeApp', (evnt) => {
+
   if (!isQuiting) {
-    event.preventDefault();
+    evnt.preventDefault();
     if (mainWindow != null) mainWindow.hide();
 
     if (tray == null) tray = createTray();
@@ -244,7 +255,6 @@ ipcMain.on('closeApp', (event) => {
 ipcMain.on('shrink-window', () => {
   if (mainWindow != null) {
     mainWindow.setSize(800, 500);
-
     mainWindow.setBounds({ width: 800, height: 500 });
     mainWindow.setMaximumSize(800, 500);
     mainWindow.center();
